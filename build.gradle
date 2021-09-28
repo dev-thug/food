@@ -31,6 +31,8 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-ui:1.5.2'
 
 
+    implementation 'net.rakugakibox.util:yaml-resource-bundle:1.1'
+
 }
 
 test {
