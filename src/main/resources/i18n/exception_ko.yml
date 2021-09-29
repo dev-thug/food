@@ -1,0 +1,6 @@
+unKnown:
+  code: "-9999"
+  message: "알 수 없는 오류가 발생하였습니다."
+notFoundResource:
+  code: "-1000"
+  message: "요청한 자원이 존재하지 않습니다."
