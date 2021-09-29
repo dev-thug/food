@@ -23,14 +23,14 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected AppError defaultException(HttpServletRequest request, Exception e) {
         // 예외 처리의 메시지를 MessageSource에서 가져오도록 수정
-        return AppError.builder().code(Integer.valueOf(getMessage("unKnown.code"))).message(getMessage("unKnown.msg")).build();
+        return AppError.builder().code(Integer.valueOf(getMessage("unKnown.code"))).message(getMessage("unKnown.message")).build();
     }
 
     @ExceptionHandler(NotFoundResourceException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected AppError userNotFoundException(HttpServletRequest request, NotFoundResourceException e) {
         // 예외 처리의 메시지를 MessageSource에서 가져오도록 수정
-        return AppError.builder().code(Integer.valueOf(getMessage("notFoundResource.code"))).message(getMessage("notFoundResource.msg")).build();
+        return AppError.builder().code(Integer.valueOf(getMessage("notFoundResource.code"))).message(getMessage("notFoundResource.message")).build();
     }
 
     // code정보에 해당하는 메시지를 조회합니다.
