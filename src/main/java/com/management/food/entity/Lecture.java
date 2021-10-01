@@ -2,6 +2,7 @@ package com.management.food.entity;
 
 import com.management.food.dto.LectureDTO;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,10 +22,13 @@ public class Lecture {
 
     String place;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate dateAt;
 
+    @DateTimeFormat(pattern = "HH:mm:ss")
     LocalTime fromAt;
 
+    @DateTimeFormat(pattern = "HH:mm:ss")
     LocalTime toAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,15 +37,6 @@ public class Lecture {
     @ManyToOne(fetch = FetchType.LAZY)
     Food food;
 
-
-    public static Lecture of(LectureDTO lectureDTO) {
-
-        return Lecture.builder()
-                .id(lectureDTO.getId()).name(lectureDTO.getName())
-                .place(lectureDTO.getPlace()).dateAt(lectureDTO.getDateAt())
-                .fromAt(lectureDTO.getFromAt()).toAt(lectureDTO.getToAt())
-                .build();
-    }
 
     public Lecture setFood(Food food) {
         this.food = food;

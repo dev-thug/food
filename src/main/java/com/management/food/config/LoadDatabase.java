@@ -53,7 +53,7 @@ public class LoadDatabase {
         for (int i = 0; i < end; i++) {
             data = (JSONObject) row.get(i);
             foodRepository.save(
-                    new Food(null, data.get("RCP_NM").toString().trim(), data.get("RCP_PARTS_DTLS").toString().replace("\n", " "), data.get("ATT_FILE_NO_MK").toString(), 10000)
+                    new Food(data.get("RCP_NM").toString().trim(), data.get("RCP_PARTS_DTLS").toString().replace("\n", " "), data.get("ATT_FILE_NO_MK").toString(), 10000)
             );
         }
 
