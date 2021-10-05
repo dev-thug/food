@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -36,9 +37,10 @@ public class LectureService {
     }
 
     public Lecture add(LectureDTO lectureDTO) {
-        Food food = foodRepository.getById(lectureDTO.getFoodId());
-        Teacher teacher = teacherRepository.getById(lectureDTO.getTeacherId());
+        Food food = foodRepository.findById(lectureDTO.getFoodId()).orElseThrow(NotFoundResourceException::new);
+        Teacher teacher = teacherRepository.findById(lectureDTO.getTeacherId()).orElseThrow(NotFoundResourceException::new);
         Lecture lecture = Lecture.builder().name(lectureDTO.getName())
+                .place(lectureDTO.getPlace())
                 .dateAt(LocalDate.parse(lectureDTO.getDate()))
                 .fromAt(LocalTime.parse(lectureDTO.getFromAt()))
                 .time(lectureDTO.getTime())
@@ -54,5 +56,20 @@ public class LectureService {
 
     public void remove(Long id) {
         lectureRepository.delete(get(id));
+    }
+
+    @Transactional
+    public Lecture update(Long id, LectureDTO lectureDTO) {
+        Food food = foodRepository.findById(lectureDTO.getFoodId()).orElseThrow(NotFoundResourceException::new);
+        Teacher teacher = teacherRepository.findById(lectureDTO.getTeacherId()).orElseThrow(NotFoundResourceException::new);
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(NotFoundResourceException::new);
+        lecture.update(lectureDTO.getName(),
+                lectureDTO.getPlace(),
+                LocalDate.parse(lectureDTO.getDate()),
+                LocalTime.parse(lectureDTO.getFromAt()),
+                lectureDTO.getTime(),
+                teacher,
+                food);
+        return lectureRepository.save(lecture);
     }
 }

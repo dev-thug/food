@@ -42,6 +42,16 @@ public class Lecture {
     Food food;
 
 
+    public void update(String name, String place, LocalDate dateAt, LocalTime fromAt, Integer time, Teacher teacher, Food food) {
+        this.name = name;
+        this.place = place;
+        this.dateAt = dateAt;
+        this.fromAt = fromAt;
+        this.time = time;
+        this.teacher = teacher;
+        this.food = food;
+    }
+
     public Lecture setFood(Food food) {
         this.food = food;
         return this;
@@ -50,6 +60,14 @@ public class Lecture {
     public Lecture setTeacher(Teacher teacher) {
         this.teacher = teacher;
         return this;
+    }
+
+    public String getTeacherName() {
+        return teacher.getName();
+    }
+
+    public Long getFoodId() {
+        return food.getId();
     }
 
 
