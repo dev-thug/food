@@ -14,7 +14,7 @@ public class OpenApiConfig {
 
     @Bean
     public OpenAPI openAPI() {
-        Info info = new Info().title("식자재 관리 API 문서")
+        Info info = new Info().title("요리 실습 신청 시스템 API 문서")
                 .description("기존 자바 프로젝트를 스프링부트로 재구현하였습니다.")
                 .termsOfService("http://swagger.io/terms/")
                 .contact(new Contact().name("hayagou").url("https://github.com/hayagou").email("de0978@gmail.com"))

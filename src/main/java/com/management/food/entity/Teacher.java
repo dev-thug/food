@@ -2,6 +2,7 @@ package com.management.food.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
+@NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Teacher {
     @Id
@@ -19,4 +21,10 @@ public class Teacher {
     String name;
 
     String account;
+
+
+    public Teacher(String name, String account) {
+        this.name = name;
+        this.account = account;
+    }
 }

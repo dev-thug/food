@@ -7,6 +7,7 @@ import com.management.food.service.FoodService;
 import com.management.food.service.LectureService;
 import com.management.food.service.TeacherService;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -20,7 +21,7 @@ public class LectureController {
     private final FoodService foodService;
 
     @GetMapping(value = "/lecture")
-    public Page<Lecture> get(@PageableDefault(sort = {"dateAt", "fromAt"}) Pageable pageable) {
+    public Page<Lecture> get(@ParameterObject @PageableDefault(sort = {"dateAt", "fromAt"}) Pageable pageable) {
         return lectureService.get(pageable);
     }
 
