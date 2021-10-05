@@ -47,24 +47,24 @@ public class FoodController {
         return foodService.updateCost(id, cost);
     }
 
-    private FoodDto convertToDto(Food food) {
-        FoodDto foodDto = modelMapper.map(food, FoodDto.class);
-
-        return foodDto;
-    }
-
-    private Food convertToEntity(FoodDto foodDto) {
-
-        // foodDto의 id 값이 있을 경우
-        if (foodDto.getId() != null) {
-
-            return foodService.get(foodDto.getId());
-        }
-
-        // foodDto의 id 값이 없을 경우
-        Food food = modelMapper.map(foodDto, Food.class);
-
-
-        return food;
-    }
+//    private FoodDto convertToDto(Food food) {
+//        FoodDto foodDto = modelMapper.map(food, FoodDto.class);
+//
+//        return foodDto;
+//    }
+//
+//    private Food convertToEntity(FoodDto foodDto) {
+//
+//        // foodDto의 id 값이 있을 경우
+//        if (foodDto.getId() != null) {
+//
+//            return foodService.get(foodDto.getId());
+//        }
+//
+//        // foodDto의 id 값이 없을 경우
+//        Food food = modelMapper.map(foodDto, Food.class);
+//
+//
+//        return food;
+//    }
 }

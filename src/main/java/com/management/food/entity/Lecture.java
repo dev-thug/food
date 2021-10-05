@@ -1,5 +1,7 @@
 package com.management.food.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.management.food.dto.LectureDTO;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +15,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Lecture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +31,13 @@ public class Lecture {
     @DateTimeFormat(pattern = "HH:mm:ss")
     LocalTime fromAt;
 
-    @DateTimeFormat(pattern = "HH:mm:ss")
-    LocalTime toAt;
+    Integer time;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     Teacher teacher;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     Food food;
 

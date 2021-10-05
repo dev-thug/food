@@ -6,6 +6,8 @@ import com.management.food.repository.LectureRepository;
 import com.management.food.service.FoodService;
 import com.management.food.service.LectureService;
 import com.management.food.service.TeacherService;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "강의", description = "강의 API")
 @RestController
 @RequiredArgsConstructor
 public class LectureController {
@@ -30,15 +33,12 @@ public class LectureController {
         return lectureService.get(id);
     }
 
-//    @PostMapping(value = "/lecture")
-//    public Lecture add(@RequestBody Long teacherId, @RequestBody Long foodId, @ModelAttribute LectureDTO lectureDTO) {
-//        return
-//    }
+    @PostMapping(value = "/lecture")
+    public Lecture add(@ParameterObject @ModelAttribute LectureDTO lectureDTO) {
 
-//    @PostMapping(value = "/lecture")
-//    public Lecture add(@RequestBody Long teacherId, @RequestBody Long foodId, @ModelAttribute LectureDTO lectureDTO) {
-//        return lectureService.add(Lecture.of(lectureDTO).setFood(foodService.get(foodId)).setTeacher(teacherService.get(teacherId)));
-//    }
+
+        return lectureService.add(lectureDTO);
+    }
 
 
 }

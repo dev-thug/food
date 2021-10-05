@@ -39,7 +39,7 @@ public class TeacherController {
         return teacherService.get(pageable);
     }
 
-    @Operation(summary = "식단 상세 조회", description = "강사 id로 상세조회")
+    @Operation(summary = "강사 상세 조회", description = "강사 id로 상세조회")
     @GetMapping(value = "/teacher/{id}")
     public Teacher get(@PathVariable Long id) {
         return teacherService.get(id);
