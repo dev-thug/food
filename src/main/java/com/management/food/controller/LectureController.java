@@ -25,7 +25,10 @@ public class LectureController {
 
     @Operation(summary = "강의 조회", description = "개설된 강의를 조회합니다..")
     @GetMapping(value = "/lecture")
-    public Page<Lecture> get(@ParameterObject @PageableDefault(direction = Sort.Direction.DESC, sort = {"dateAt", "fromAt"}) Pageable pageable) {
+    public Page<Lecture> get(@ParameterObject @PageableDefault(direction = Sort.Direction.DESC, sort = {"dateAt", "fromAt"}) Pageable pageable, @RequestParam(required = false) String search) {
+        if (search != null) {
+            return lectureService.get(search, pageable);
+        }
         return lectureService.get(pageable);
     }
 
