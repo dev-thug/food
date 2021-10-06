@@ -34,7 +34,7 @@ public class LoadDatabase {
 
         String key = "4514d4ff87db4cf8b776";
         int start = 1;
-        int end = 5;
+        int end = 5; // total_count = 1318
         HttpEntity entity = new HttpEntity(headers);
         URI uri = URI.create("http://openapi.foodsafetykorea.go.kr/api/sample/COOKRCP01/json/" + start + "/" + end);
 

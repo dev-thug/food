@@ -70,5 +70,9 @@ public class Lecture {
         return food.getId();
     }
 
+    public int getCost() {
+        return food.getCost();
+    }
+
 
 }

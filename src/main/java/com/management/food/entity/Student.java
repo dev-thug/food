@@ -8,6 +8,8 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
 
     @Id
@@ -18,4 +20,9 @@ public class Student {
 
     @Column(unique = true)
     String phone;
+
+    public Student(String name, String phone) {
+        this.name = name;
+        this.phone = phone;
+    }
 }

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class LectureController {
 
     @Operation(summary = "강의 조회", description = "개설된 강의를 조회합니다..")
     @GetMapping(value = "/lecture")
-    public Page<Lecture> get(@ParameterObject @PageableDefault(sort = {"dateAt", "fromAt"}) Pageable pageable) {
+    public Page<Lecture> get(@ParameterObject @PageableDefault(direction = Sort.Direction.DESC, sort = {"dateAt", "fromAt"}) Pageable pageable) {
         return lectureService.get(pageable);
     }
 

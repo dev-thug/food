@@ -29,12 +29,11 @@ dependencies {
 
 
     implementation 'org.springdoc:springdoc-openapi-ui:1.5.2'
-    implementation 'org.springdoc:springdoc-openapi-data-rest:1.5.11'
+    implementation 'org.springdoc:springdoc-openapi-data-rest:1.5.2'
 
 
     implementation 'net.rakugakibox.util:yaml-resource-bundle:1.1'
 
-    implementation 'org.modelmapper:modelmapper:2.4.4'
 
 }
 

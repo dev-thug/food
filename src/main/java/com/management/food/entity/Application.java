@@ -3,8 +3,8 @@ package com.management.food.entity;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+
 
 @Entity
 @Getter
@@ -22,7 +22,16 @@ public class Application {
     int credit;
     int refund;
 
-    LocalDate creditAt;
-    LocalDate refundAt;
-    LocalDate cancelAt;
+    LocalDateTime creditAt;
+    LocalDateTime refundAt;
+    LocalDateTime cancelAt;
+
+    Status status;
+
+    enum Status{
+        IN_PROGRESS,
+        COMPLETED,
+        CANCELLED,
+        REFUNDED
+    }
 }
