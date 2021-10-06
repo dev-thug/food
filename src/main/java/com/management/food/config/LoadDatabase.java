@@ -1,7 +1,9 @@
 package com.management.food.config;
 
 import com.management.food.entity.Food;
+import com.management.food.entity.User;
 import com.management.food.repository.FoodRepository;
+import com.management.food.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -13,9 +15,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.*;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.util.Collections;
 
 @Configuration
 @RequiredArgsConstructor
@@ -23,7 +28,11 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(FoodRepository foodRepository) throws ParseException {
+    CommandLineRunner initDatabase(FoodRepository foodRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) throws ParseException {
+
+        //Fixme 관리자 권한 계정 삭제
+        User user = User.builder().email("admin").password(passwordEncoder.encode("admin")).name("김현중").roles(Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"))).build();
+        userRepository.save(user);
 
         long startTime = System.currentTimeMillis();
 
