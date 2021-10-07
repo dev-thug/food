@@ -37,7 +37,6 @@ public class LectureDTO {
 
     long foodId;
 
-    long teacherId;
 
 
 }

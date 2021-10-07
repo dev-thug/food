@@ -10,7 +10,9 @@ import com.management.food.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,21 +23,27 @@ import java.util.Collections;
 
 @RequiredArgsConstructor
 @Service
-public class UserService  {
+public class UserService {
 
     private final TokenProvider tokenProvider;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
+    public User getAuthedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        return userRepository.findByEmail(email).orElseThrow(NotFoundUserException::new);
+    }
 
     public User get(String email) {
         return userRepository.findByEmail(email).orElseThrow(NotFoundEmailException::new);
     }
 
-    public User get(Long id){
+    public User get(Long id) {
         return userRepository.findById(id).orElseThrow(NotFoundUserException::new);
     }
-    public String getToken(String email, String password){
+
+    public String getToken(String email, String password) {
         User user = this.get(email);
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new InvalidPasswordException();
@@ -58,7 +66,7 @@ public class UserService  {
         return this.add(user);
     }
 
-    public Page<User> get(SimpleGrantedAuthority role, Pageable pageable){
+    public Page<User> get(SimpleGrantedAuthority role, Pageable pageable) {
         return userRepository.findAllByRolesContaining(role, pageable);
     }
 }

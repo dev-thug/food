@@ -2,7 +2,6 @@ package com.management.food.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.management.food.dto.LectureDTO;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,35 +34,31 @@ public class Lecture {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    Teacher teacher;
+    User user;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     Food food;
 
 
-    public void update(String name, String place, LocalDate dateAt, LocalTime fromAt, Integer time, Teacher teacher, Food food) {
+    public void update(String name, String place, LocalDate dateAt, LocalTime fromAt, Integer time) {
         this.name = name;
         this.place = place;
         this.dateAt = dateAt;
         this.fromAt = fromAt;
         this.time = time;
-        this.teacher = teacher;
+    }
+
+    public void setFood(Food food) {
         this.food = food;
     }
 
-    public Lecture setFood(Food food) {
-        this.food = food;
-        return this;
-    }
-
-    public Lecture setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-        return this;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getTeacherName() {
-        return teacher.getName();
+        return user.getName();
     }
 
     public Long getFoodId() {

@@ -25,7 +25,7 @@ public class Application {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    Student student;
+    User user;
 
     @Setter
     int cost;
@@ -51,8 +51,8 @@ public class Application {
         REFUNDED
     }
 
-    public Application(Student student, Lecture lecture) {
-        this.student = student;
+    public Application(User user, Lecture lecture) {
+        this.user = user;
         this.lecture = lecture;
         this.status = Status.IN_PROGRESS;
         this.cost = 0;
@@ -64,7 +64,7 @@ public class Application {
     }
 
     public Long getStudentId() {
-        return student.getId();
+        return user.getId();
     }
 
     public void complete() {

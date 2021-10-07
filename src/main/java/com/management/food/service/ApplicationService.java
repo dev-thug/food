@@ -1,13 +1,10 @@
 package com.management.food.service;
 
 import com.management.food.advice.exception.NotFoundResourceException;
-import com.management.food.dto.ApplicationDTO;
 import com.management.food.entity.Application;
 import com.management.food.entity.Lecture;
-import com.management.food.entity.Student;
 import com.management.food.repository.ApplicationRepository;
 import com.management.food.repository.LectureRepository;
-import com.management.food.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,19 +15,16 @@ import javax.transaction.Transactional;
 public class ApplicationService {
     private final ApplicationRepository applicationRepository;
     private final LectureRepository lectureRepository;
-    private final StudentRepository studentRepository;
+    private final UserService userService;
 
     public Application add(Application application) {
         return applicationRepository.save(application);
     }
 
-    public Application add(ApplicationDTO applicationDTO) {
+    public Application add(Long id) {
+        Lecture lecture = lectureRepository.findById(id).orElseThrow(NotFoundResourceException::new);
 
-        Student student = studentRepository.findById(applicationDTO.getStudentId()).orElseThrow(NotFoundResourceException::new);
-        Lecture lecture = lectureRepository.findById(applicationDTO.getLectureId()).orElseThrow(NotFoundResourceException::new);
-
-        Application application = new Application(student, lecture);
-
+        Application application = new Application(userService.getAuthedUser(), lecture);
         return add(application);
     }
 
