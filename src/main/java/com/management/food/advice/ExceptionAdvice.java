@@ -1,13 +1,10 @@
 package com.management.food.advice;
 
-import com.management.food.advice.exception.AppError;
-import com.management.food.advice.exception.NotFoundResourceException;
-import com.management.food.advice.exception.NotFoundUserException;
+import com.management.food.advice.exception.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -18,14 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class ExceptionAdvice {
     private final MessageSource messageSource;
-
-
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    protected AppError defaultException(HttpServletRequest request, Exception e) {
-        // 예외 처리의 메시지를 MessageSource 에서 가져오도록 수정
-        return AppError.builder().code(Integer.valueOf(getMessage("unKnown.code"))).message(getMessage("unKnown.message")).build();
-    }
 
     @ExceptionHandler(NotFoundResourceException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -39,6 +28,23 @@ public class ExceptionAdvice {
     protected AppError userNotUserException(HttpServletRequest request, NotFoundUserException e) {
         return AppError.builder().code(Integer.valueOf(getMessage("notFoundUser.code"))).message(getMessage("notFoundUser.message")).build();
     }
+
+    @ExceptionHandler(NotFoundEmailException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    protected AppError userNotEmailException(HttpServletRequest request, NotFoundEmailException e) {
+        return AppError.builder().code(Integer.valueOf(getMessage("notFoundEmail.code"))).message(getMessage("notFoundEmail.message")).build();
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    protected AppError invalidPasswordException(HttpServletRequest request, InvalidPasswordException e) {
+        return AppError.builder().code(Integer.valueOf(getMessage("invalidPassword.code"))).message(getMessage("invalidPassword.message")).build();
+    }
+
+
+
+
+
 
     // code 정보에 해당하는 메시지를 조회합니다.
     private String getMessage(String code) {

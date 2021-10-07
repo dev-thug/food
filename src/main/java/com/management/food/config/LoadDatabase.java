@@ -20,7 +20,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
@@ -31,7 +33,14 @@ public class LoadDatabase {
     CommandLineRunner initDatabase(FoodRepository foodRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) throws ParseException {
 
         //Fixme 관리자 권한 계정 삭제
-        User user = User.builder().email("admin").password(passwordEncoder.encode("admin")).name("김현중").roles(Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"))).build();
+        List<SimpleGrantedAuthority> list = new ArrayList<>();
+        list.add(new SimpleGrantedAuthority("ROLE_USER"));
+        list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        User user = User.builder().email("admin").password(passwordEncoder.encode("admin")).name("김현중")
+//                .roles(Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")))
+                .roles(list)
+                .build();
+
         userRepository.save(user);
 
         long startTime = System.currentTimeMillis();

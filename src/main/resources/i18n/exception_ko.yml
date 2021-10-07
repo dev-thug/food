@@ -1,9 +1,16 @@
-unKnown:
-  code: "-9999"
-  message: "알 수 없는 오류가 발생하였습니다."
+
 notFoundResource:
   code: "-1000"
   message: "요청한 자원이 존재하지 않습니다."
 notFoundUser:
   code: "-2000"
   message: "계정이 존재하지 않거나 이메일 또는 비밀번호가 정확하지 않습니다."
+
+
+# AuthException
+notFoundEmail:
+  code: "-3000"
+  message: "존재하지 않는 이메일 입니다."
+invalidPassword:
+  code: "-3100"
+  message: "비밀번호가 일치하지 않습니다."

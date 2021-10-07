@@ -1,5 +1,7 @@
 package com.management.food.config.security;
 
+import com.management.food.advice.exception.NotFoundUserException;
+import com.management.food.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -30,7 +32,8 @@ public class TokenProvider {
 
     private final long validTime = 1000L * 60 * 60 * 24;
 
-    private final UserDetailsService userDetailsService;
+//    private final UserDetailsService userDetailsService;
+    private final UserRepository userRepository;
 
     @PostConstruct
     protected void init() {
@@ -50,12 +53,12 @@ public class TokenProvider {
                 .compact();
     }
 
-    public String getEmail(String token) {
+    public String getUserId(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getEmail(token));
+        UserDetails userDetails = userRepository.findById(Long.valueOf(this.getUserId(token))).orElseThrow(NotFoundUserException::new); // userDetailsService.loadUserByUsername(this.getEmail(token));
 
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }

@@ -1,33 +1,34 @@
 package com.management.food.controller;
 
+import com.management.food.advice.exception.InvalidPasswordException;
 import com.management.food.config.security.TokenProvider;
+import com.management.food.dto.UserDTO;
 import com.management.food.entity.User;
 import com.management.food.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.api.annotations.ParameterObject;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 
 @RequiredArgsConstructor
 @RestController
 public class AuthController {
 
-    private final TokenProvider tokenProvider;
+
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
-    @PostMapping("/login")
+    @PostMapping("/signin")
     public String signIn(@RequestParam String email, @RequestParam String password) {
-        User user = userService.get(email);
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            return "로그인 실패";
-        }
-
-        return tokenProvider.createToken(String.valueOf(user.getId()), user.getRoles());
+        return userService.getToken(email, password);
     }
 
-    @GetMapping("/user/{id}")
-    public User get(@PathVariable long id){
-        return (User) userService.loadUserByUsername(String.valueOf(id));
+    @PostMapping(value = "/signup")
+    public User signUp(@ParameterObject @ModelAttribute UserDTO userDTO) {
+        return userService.add(userDTO);
     }
+
 
 }

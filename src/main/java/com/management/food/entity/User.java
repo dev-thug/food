@@ -1,5 +1,6 @@
 package com.management.food.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,7 @@ public class User implements UserDetails {
 
     private String email;
 
+    @JsonIgnore
     private String password;
 
     private String name;
@@ -35,7 +37,7 @@ public class User implements UserDetails {
     @Builder.Default
     public List<SimpleGrantedAuthority> roles = new ArrayList<>();
 
-
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles;
