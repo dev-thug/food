@@ -47,6 +47,8 @@ public class LectureController {
         return lectureService.add(lectureDTO);
     }
 
+    @Secured("ROLE_ADMIN")
+    @Parameter(name = "AUTH-TOKEN", in = ParameterIn.HEADER, description = "인증을 위한 JWT 토큰입니다", required = true)
     @Operation(summary = "강의 수정", description = "강의를 수정합니다.")
     @PutMapping(value = "/lecture/{id}")
     public Lecture update(@PathVariable Long id, @ParameterObject @ModelAttribute LectureDTO lectureDTO) {

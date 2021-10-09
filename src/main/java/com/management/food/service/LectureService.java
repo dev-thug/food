@@ -22,6 +22,7 @@ public class LectureService {
     private final FoodRepository foodRepository;
     private final UserService userService;
 
+
     public Page<Lecture> get(Pageable pageable) {
         return lectureRepository.findAll(pageable);
     }
