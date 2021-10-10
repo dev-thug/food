@@ -1,8 +1,13 @@
 package com.management.food.config;
 
+import com.management.food.advice.exception.NotFoundResourceException;
+import com.management.food.entity.Application;
 import com.management.food.entity.Food;
+import com.management.food.entity.Lecture;
 import com.management.food.entity.User;
+import com.management.food.repository.ApplicationRepository;
 import com.management.food.repository.FoodRepository;
+import com.management.food.repository.LectureRepository;
 import com.management.food.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONArray;
@@ -20,6 +25,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +37,7 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(FoodRepository foodRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) throws ParseException {
+    CommandLineRunner initDatabase(LectureRepository lectureRepository, ApplicationRepository applicationRepository, FoodRepository foodRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) throws ParseException {
 
         //Fixme 관리자 권한 계정 삭제
         List<SimpleGrantedAuthority> list = new ArrayList<>();
@@ -74,6 +81,14 @@ public class LoadDatabase {
                     new Food(data.get("RCP_NM").toString().trim(), data.get("RCP_PARTS_DTLS").toString().replace("\n", " "), data.get("ATT_FILE_NO_MK").toString(), 10000)
             );
         }
+
+        Lecture lecture = new Lecture(null, "첫번째 강의", "집", LocalDate.now(), LocalTime.now(), 2, user, foodRepository.findById(1L).orElseThrow(NotFoundResourceException::new));
+
+        lectureRepository.save(lecture);
+
+        Application application = new Application(user, lecture);
+        applicationRepository.save(application);
+
 
         long endTime = System.currentTimeMillis();
 

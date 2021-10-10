@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -39,6 +40,18 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     protected AppError invalidPasswordException(HttpServletRequest request, InvalidPasswordException e) {
         return AppError.builder().code(Integer.valueOf(getMessage("invalidPassword.code"))).message(getMessage("invalidPassword.message")).build();
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    protected AppError accessDeniedException(HttpServletRequest request, AccessDeniedException e) {
+        return AppError.builder().code(Integer.valueOf(getMessage("accessDenied.code"))).message(getMessage("accessDenied.message")).build();
+    }
+
+    @ExceptionHandler(InsufficientPointException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    protected AppError accessDeniedException(HttpServletRequest request, InsufficientPointException e) {
+        return AppError.builder().code(Integer.valueOf(getMessage("insufficientPoint.code"))).message(getMessage("insufficientPoint.message")).build();
     }
 
 

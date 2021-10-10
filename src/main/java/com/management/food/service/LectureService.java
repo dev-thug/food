@@ -4,6 +4,7 @@ import com.management.food.advice.exception.NotFoundResourceException;
 import com.management.food.dto.LectureDTO;
 import com.management.food.entity.Food;
 import com.management.food.entity.Lecture;
+import com.management.food.entity.User;
 import com.management.food.repository.FoodRepository;
 import com.management.food.repository.LectureRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,6 @@ public class LectureService {
     private final FoodRepository foodRepository;
     private final UserService userService;
 
-
     public Page<Lecture> get(Pageable pageable) {
         return lectureRepository.findAll(pageable);
     }
@@ -32,7 +32,7 @@ public class LectureService {
     }
 
     public Page<Lecture> get(String name, Pageable pageable) {
-        return lectureRepository.findByNameContaining(name, pageable);
+        return lectureRepository.findAllByNameContaining(name, pageable);
     }
 
     public Lecture add(LectureDTO lectureDTO) {

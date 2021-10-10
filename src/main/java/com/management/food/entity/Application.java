@@ -67,7 +67,8 @@ public class Application {
         return user.getId();
     }
 
-    public void complete() {
+    public void complete(int cost) {
+        this.cost = cost;
         this.status = Status.COMPLETED;
         this.completeAt = LocalDateTime.now();
     }
@@ -79,6 +80,7 @@ public class Application {
 
     public void refund() {
         this.status = Status.REFUNDED;
+        this.cost = 0;
         this.refundAt = LocalDateTime.now();
     }
 

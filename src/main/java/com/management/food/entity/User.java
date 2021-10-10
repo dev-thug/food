@@ -2,10 +2,7 @@ package com.management.food.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +28,9 @@ public class User implements UserDetails {
     private String password;
 
     private String name;
+
+    @Setter
+    private Integer point;
 
 
     @ElementCollection(fetch = FetchType.EAGER)
