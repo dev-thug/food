@@ -45,7 +45,7 @@ public class FoodController {
     public PagedModel<EntityModel<Food>> get(@ParameterObject @PageableDefault(sort = "name", direction = Sort.Direction.ASC) Pageable pageable, @RequestParam(required = false) String search) {
 
         if (search != null) {
-            return resourcesAssembler.toModel(foodService.get(search, pageable));
+            return resourcesAssembler.toModel(foodService.get(search, pageable), modelAssembler);
         }
         return resourcesAssembler.toModel(foodService.get(pageable), modelAssembler);
     }

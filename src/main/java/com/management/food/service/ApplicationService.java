@@ -21,8 +21,8 @@ public class ApplicationService {
         return applicationRepository.save(application);
     }
 
-    public Application add(Long id) {
-        Lecture lecture = lectureRepository.findById(id).orElseThrow(NotFoundResourceException::new);
+    public Application add(Long lectureId) {
+        Lecture lecture = lectureRepository.findById(lectureId).orElseThrow(NotFoundResourceException::new);
 
         Application application = new Application(userService.getAuthedUser(), lecture);
         return add(application);

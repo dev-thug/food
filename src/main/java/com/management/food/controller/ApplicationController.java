@@ -1,5 +1,6 @@
 package com.management.food.controller;
 
+import com.management.food.assembler.ApplicationModelAssembler;
 import com.management.food.entity.Application;
 import com.management.food.service.ApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,6 +9,7 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +19,14 @@ import org.springframework.web.bind.annotation.*;
 public class ApplicationController {
 
     private final ApplicationService applicationService;
+    private final ApplicationModelAssembler modelAssembler;
 
     @Secured("ROLE_USER")
     @Parameter(name = "AUTH-TOKEN", in = ParameterIn.HEADER, description = "인증을 위한 JWT 토큰입니다", required = true)
     @Operation(summary = "수강 신청", description = "수강 신청을 합니다.")
     @PostMapping(value = "/application")
-    public Application add(@RequestParam Long id) {
-        return applicationService.add(id);
+    public EntityModel<Application> add(@RequestParam Long lectureId) {
+        return modelAssembler.toModel(applicationService.add(lectureId));
     }
 
     // Fixme 수강 신청후 입금, 환불 , 입금을 많이 했을때, 적게 했을때 기능필요

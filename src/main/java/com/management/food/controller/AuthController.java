@@ -9,7 +9,11 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Tag(name = "회원 인증", description = "회원 인증 API")
@@ -22,8 +26,10 @@ public class AuthController {
 
     @Operation(summary = "회원 로그인", description = "회원이 로그인후 인증 토큰을 발행받습니다.")
     @PostMapping("/signin")
-    public String signIn(@RequestParam String email, @RequestParam String password) {
-        return userService.getToken(email, password);
+    public ResponseEntity<?> signIn(@RequestParam String email, @RequestParam String password) {
+        Map<String, String> map = new HashMap<>();
+        map.put("auth-token", userService.getToken(email, password));
+        return ResponseEntity.accepted().body(map);
     }
 
     @Operation(summary = "회원 가입", description = "회원가입을 합니다..")
