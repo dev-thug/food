@@ -59,9 +59,9 @@ public class LoadDatabase {
 
         String key = "4514d4ff87db4cf8b776";
         int start = 1;
-        int end = 5; // total_count = 1318
+        int end = 999; // total_count = 1318
         HttpEntity entity = new HttpEntity(headers);
-        URI uri = URI.create("http://openapi.foodsafetykorea.go.kr/api/sample/COOKRCP01/json/" + start + "/" + end);
+        URI uri = URI.create("http://openapi.foodsafetykorea.go.kr/api/4514d4ff87db4cf8b776/COOKRCP01/json/" + start + "/" + end);
 
         ResponseEntity responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
 
@@ -78,7 +78,7 @@ public class LoadDatabase {
         for (int i = 0; i < end; i++) {
             data = (JSONObject) row.get(i);
             foodRepository.save(
-                    new Food(data.get("RCP_NM").toString().trim(), data.get("RCP_PARTS_DTLS").toString().replace("\n", " "), data.get("ATT_FILE_NO_MK").toString(), 10000)
+                    new Food(data.get("RCP_NM").toString().trim(), data.get("RCP_PARTS_DTLS").toString().replace("\n", " "), data.get("ATT_FILE_NO_MK").toString(), 10000, data.get("RCP_PAT2").toString())
             );
         }
 

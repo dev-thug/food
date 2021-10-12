@@ -28,7 +28,7 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@RequestParam String email, @RequestParam String password) {
         Map<String, String> map = new HashMap<>();
-        map.put("auth-token", userService.getToken(email, password));
+        map.put("token", userService.getToken(email, password));
         return ResponseEntity.accepted().body(map);
     }
 

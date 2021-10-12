@@ -51,8 +51,8 @@ public class FoodController {
     }
 
 
-    @Secured("ROLE_ADMIN")
-    @Parameter(name = "AUTH-TOKEN", in = ParameterIn.HEADER, description = "인증을 위한 JWT 토큰입니다", required = true)
+//    @Secured("ROLE_ADMIN")
+//    @Parameter(name = "AUTH-TOKEN", in = ParameterIn.HEADER, description = "인증을 위한 JWT 토큰입니다", required = true)
     @Operation(summary = "실습 비용 수정", description = "식단 id에 대한 실습 비용을 수정")
     @PutMapping(value = "/food/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestParam int cost) {
