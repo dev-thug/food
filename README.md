@@ -7,12 +7,16 @@
 # 2. REST-API 문서
 - [Swagger 문서](https://hayagou.shop/api/swagger-ui.html)
 
-# 3. 사용한 OPEN-API
+# 3. Front End
+- Angular로 SPA 구현후 REST-API 와 연동
+- [데모 웹](https://hayagou.shop)
+
+# 4. 사용한 OPEN-API
 
 - 식단과 식재료에대한 데이터들은 공공데이터 API를 호출하여 필요한 데이터만 가공후 디비에 저장후 사용
 - [조리식품의 레시피 DB](http://www.foodsafetykorea.go.kr/api/openApiInfo.do?menu_grp=MENU_GRP31&menu_no=661&show_cnt=10&start_idx=1&svc_no=COOKRCP01)
 
-# 4. ERD
+# 5. ERD
 
 |기존ERD|새로디자인한 ERD|
 |--|--|
@@ -23,7 +27,7 @@
 - 신청내역 테이블 삭제후 신청 테이블에서 쿼리문으로 조회
 - 식재료_신청내역 테이블 삭제후 비지니스로직에서 입금이 완료된 수강생을 수와 식단을 계산하여 신청내역 조회
 
-# 5.개발 도구
+# 6.개발 도구
 ## Spring boot
 - JAVA 11
 - JWT
