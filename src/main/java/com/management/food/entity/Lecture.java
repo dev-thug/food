@@ -69,5 +69,9 @@ public class Lecture {
         return food.getCost();
     }
 
+    public String getFoodImage() {
+        return food.getImage();
+    }
+
 
 }

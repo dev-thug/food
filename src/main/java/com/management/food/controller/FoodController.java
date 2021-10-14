@@ -51,8 +51,8 @@ public class FoodController {
     }
 
 
-//    @Secured("ROLE_ADMIN")
-//    @Parameter(name = "AUTH-TOKEN", in = ParameterIn.HEADER, description = "인증을 위한 JWT 토큰입니다", required = true)
+    @Secured("ROLE_ADMIN")
+    @Parameter(name = "AUTH-TOKEN", in = ParameterIn.HEADER, description = "인증을 위한 JWT 토큰입니다", required = true)
     @Operation(summary = "실습 비용 수정", description = "식단 id에 대한 실습 비용을 수정")
     @PutMapping(value = "/food/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestParam int cost) {
@@ -60,25 +60,4 @@ public class FoodController {
         return ResponseEntity.created(entity.getRequiredLink(IanaLinkRelations.SELF).toUri())
                 .body(entity);
     }
-
-//    private FoodDto convertToDto(Food food) {
-//        FoodDto foodDto = modelMapper.map(food, FoodDto.class);
-//
-//        return foodDto;
-//    }
-//
-//    private Food convertToEntity(FoodDto foodDto) {
-//
-//        // foodDto의 id 값이 있을 경우
-//        if (foodDto.getId() != null) {
-//
-//            return foodService.get(foodDto.getId());
-//        }
-//
-//        // foodDto의 id 값이 없을 경우
-//        Food food = modelMapper.map(foodDto, Food.class);
-//
-//
-//        return food;
-//    }
 }
