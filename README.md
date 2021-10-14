@@ -10,6 +10,7 @@
 # 3. Front End
 - Angular로 SPA 구현후 REST-API 와 연동
 - [데모 웹](https://hayagou.shop)
+- 관리자 권한 계정 (admin/admin)
 
 # 4. 사용한 OPEN-API
 
