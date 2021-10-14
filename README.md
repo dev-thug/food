@@ -15,6 +15,10 @@
 |--|--|
 |![oldERD](https://sat02pap001files.storage.live.com/y4mG25ylLZD0cGttzcGU-QoELKceuPiLL3TH8lTrIW81QWdEk6oKPa-WiO847KMKF_qQoKelvFs7axXSDPiJ24U4wqkpXnTZLoAjkAws48iNsnt6cgp8RieedOAWOsnapaCjVLzgrKIXZPiD1O7LMlllzkbMHuCHVg4WwTRZot3BlL3MFyNcHunl-rwvTaCH8nJPNVl5xn26HHqmGkAscIqWw/%EA%B8%B0%EC%A1%B4ERD.png?psid=1&width=1189&height=925)|![NewERD](https://sat02pap001files.storage.live.com/y4m15FIek_Zp48BugGZVMDnD4NCCWsm286uydVGHoBm37qbFNaVoqRzW_qMiy2s6Qroa0aE2eThKi2NSzV4FnNnDwB7keTSgINAwYXCaw_oitl4lu_Ey67859eru48Kpkr4xRKwdXcO_XgpuG_EKnHVIH88bXmfAeSP-Ma84EAqGgP4--w6e62zWEBSrSWOaKhZ8_fF9O9IHuOZ7MFUocyuIg/%EC%83%88%EB%A1%9C%EB%94%94%EC%9E%90%EC%9D%B8%ED%95%9CERD.png?psid=1&width=1422&height=652)|
 
+- 레시피와 식재료 테이블을 식단으로 반정규화
+- Spring Security를 적용하면서 강사, 수강생 테이블 삭제후 사용자로 통합
+- 신청내역 테이블 삭제후 신청 테이블에서 쿼리문으로 조회
+- 식재료_신청내역 테이블 삭제후 비지니스로직에서 입금이 완료된 수강생을 수와 식단을 계산하여 신청내역 조회
 
 # 5.개발 도구
 ## Spring boot
