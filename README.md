@@ -3,11 +3,16 @@
 수강생은 개설된 강좌에 수강 신청후 실습비를 입금하면 수강 신청 완료가 됩니다.   
 강사는 강의를 개설하고 수강생들의 수강신청을 받습니다.  
 
+# 2. 요구사항 분석
 
-# 2. REST-API 문서
+# 3. 설계 
+## 1. REST-API 문서
 - [Swagger 문서](https://hayagou.shop/api/swagger-ui.html)
 
-# 3. Front End
+# 3. 구현 결과
+[요리 실습 수강 신청 앱](https://hayagou.shop)
+
+## 1. Front End
 - Angular로 SPA 구현후 REST-API 와 연동
 - [데모 웹](https://hayagou.shop)
 - 관리자 권한 계정 (admin/admin)
