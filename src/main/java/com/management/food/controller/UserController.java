@@ -37,6 +37,8 @@ public class UserController {
 
 
     @GetMapping(value = "/user")
+    @Parameter(name = "AUTH-TOKEN", in = ParameterIn.HEADER, description = "인증을 위한 JWT 토큰입니다", required = true)
+    @Operation(summary = "권한별 회원 조회", description = "회원리스트를 조회합니다.")
     public Page get(String role, Pageable pageable) {
         return userService.get(new SimpleGrantedAuthority(role), pageable);
     }
