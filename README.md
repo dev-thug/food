@@ -9,7 +9,7 @@
 ## 1. REST-API 문서
 - [Swagger 문서](https://hayagou.shop/api/swagger-ui.html)
 
-# 3. 구현 결과
+# 4. 구현 결과
 [요리 실습 수강 신청 앱](https://hayagou.shop)
 
 ## 1. Front End
@@ -17,12 +17,12 @@
 - [데모 웹](https://hayagou.shop)
 - 관리자 권한 계정 (admin/admin)
 
-# 4. 사용한 OPEN-API
+# 5. 사용한 OPEN-API
 
 - 식단과 식재료에대한 데이터들은 공공데이터 API를 호출하여 필요한 데이터만 가공후 디비에 저장후 사용
 - [조리식품의 레시피 DB](http://www.foodsafetykorea.go.kr/api/openApiInfo.do?menu_grp=MENU_GRP31&menu_no=661&show_cnt=10&start_idx=1&svc_no=COOKRCP01)
 
-# 5. ERD
+# 6. ERD
 
 |기존ERD|새로디자인한 ERD|
 |--|--|
