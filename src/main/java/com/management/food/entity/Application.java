@@ -44,6 +44,8 @@ public class Application {
     @Setter
     Status status;
 
+
+
     public enum Status {
         IN_PROGRESS,
         COMPLETED,
